@@ -24,7 +24,6 @@ onMounted(() => (errors.value = {}));
 
 <template>
     <GuestLayout>
-        <Head title="Register" />
 
         <form @submit.prevent="authenticate('register', form)">
             <div>

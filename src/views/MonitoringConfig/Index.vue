@@ -1,5 +1,4 @@
 <template>
-  <Head :title="pageTitle" />
 
   <AuthenticatedLayout>
     <!-- Breadcrumb Start -->

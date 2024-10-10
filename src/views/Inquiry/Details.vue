@@ -4,7 +4,8 @@ import DefaultCard from '@/components/Forms/DefaultCard';
 import InputGroup from '@/components/Forms/InputGroup';
 import AuthenticatedLayout from '@/layouts/AuthenticatedLayout';
 import { Entry } from '@/services/MID-API';
-import moment from 'moment';
+// import moment from 'moment';
+import moment from '@/plugins/moment';
 import { onMounted, computed, ref } from 'vue';
 import { RouterLink, useRoute } from "vue-router";
 
@@ -58,7 +59,6 @@ onMounted(() => {
 </script>
 
 <template>
-  <Head :title="pageTitle" />
 
   <AuthenticatedLayout>
     <!-- Breadcrumb Start -->

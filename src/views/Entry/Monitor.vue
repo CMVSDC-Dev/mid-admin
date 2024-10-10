@@ -3,7 +3,8 @@ import BreadcrumbDefault from '@/components/Breadcrumbs/BreadcrumbDefault';
 import AuthenticatedLayout from '@/layouts/AuthenticatedLayout';
 import { Inquiry } from '@/services/MID-API';
 import debounce from 'lodash/debounce';
-import moment from 'moment';
+// import moment from 'moment';
+import moment from '@/plugins/moment';
 import { computed, ref, watch } from 'vue';
 
 const pageTitle = ref('Monitor (as of date)')
@@ -95,7 +96,6 @@ function getNumberOfDays(start, end) {
 </script>
 
 <template>
-  <Head :title="pageTitle" />
 
   <AuthenticatedLayout>
     <!-- Breadcrumb Start -->

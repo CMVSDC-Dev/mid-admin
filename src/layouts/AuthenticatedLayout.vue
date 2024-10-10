@@ -1,6 +1,6 @@
 <script setup>
-import HeaderArea from '@/components/Header/HeaderArea.vue';
-import SidebarArea from '@/components/Sidebar/SidebarArea.vue';
+import HeaderArea from '@/components/Header/HeaderArea';
+import SidebarArea from '@/components/Sidebar/SidebarArea';
 import { useToast } from "vue-toastification";
 const toast = useToast()
 

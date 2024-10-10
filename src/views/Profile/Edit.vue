@@ -20,7 +20,6 @@ const user = usePage().props.auth.user;
 </script>
 
 <template>
-  <Head :title="pageTitle" />
 
   <AuthenticatedLayout>
     <!-- Breadcrumb Start -->

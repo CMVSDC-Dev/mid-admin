@@ -2,23 +2,25 @@
 import AuthenticatedLayout from '@/layouts/AuthenticatedLayout';
 import DataStatsOne from './Widgets/DataStats/DataStatsOne';
 import { Analytics, Inquiry, MonitoringConfig, Settings } from '@/services/MID-API';
-import { useDashboardStore } from '@/stores/dashboard';
-import moment from 'moment';
-import { computed, onMounted, ref, watch } from 'vue';
+// import { useDashboardStore } from '@/stores/dashboard';
+// import moment from 'moment';
+import moment from '@/plugins/moment';
+moment.tz.setDefault('Asia/Manila');
+import { computed, onMounted, ref, watch, nextTick } from 'vue';
 import { useToast } from "vue-toastification";
 const toast = useToast()
 
 const configs = ref([]);
 
-const lastResetDate = ref(moment().format('YYYY-MM-DD hh:mm:ss'));
+const lastResetDate = ref(moment());
 
 const newResetDate = ref(lastResetDate)
 
-const dashboardStore = useDashboardStore()
-const dateRange = ref([]);
-const formatter = ref({ date: 'YYYY-MM-DD', month: 'MMMM' });
-const start = ref(null);
-const end = ref(null);
+// const dashboardStore = useDashboardStore()
+// const dateRange = ref([]);
+// const formatter = ref({ date: 'YYYY-MM-DD', month: 'MMMM' });
+// const start = ref(null);
+// const end = ref(null);
 
 const convertDate = (newDate, pattern) => {
   let format = pattern ?? 'MMM D, YYYY hh:mma (ddd)';
@@ -37,10 +39,11 @@ const headers = [
 const items = ref([]);
 
 const formattedItems = computed(() => {
-    return items.value.map(item => ({
-      ...item,
-      date: item.LastRequestDate ? moment(item.LastRequestDate).format('MMM DD, YYYY hh:mma') : ''
-    }));
+  if(items.length === 0) return
+  return items.value.map(item => ({
+    ...item,
+    date: item.LastRequestDate ? moment(item.LastRequestDate).format('MMM DD, YYYY hh:mma') : ''
+  }));
 })
 
 const loading = ref(false);
@@ -54,7 +57,7 @@ const serverOptions = ref({
 
 const fetchData = async () => {
   loading.value = true;
-  await Inquiry.countEntries(serverOptions.value).then(response => {
+  await Analytics.countEntries(serverOptions.value).then(response => {
     items.value = response.data.data;
     serverItemsLength.value = response.data.total;
     loading.value = false;
@@ -121,7 +124,10 @@ const resetMonitoring = async () => {
 const getConfigs = async () => {
   await MonitoringConfig.fetchRecords()
     .then(response => {
-      configs.value = response.data;
+      configs.value = response.data.configs;
+      lastResetDate.value = response.data.lastResetDate;
+      newResetDate.value = response.data.lastResetDate;
+      updateResetDate();
     })
     .catch(error => {
         console.error(error);
@@ -142,16 +148,16 @@ function getNumberOfDays(start, end) {
 }
 // console.log(getNumberOfDays(lastResetDate, "2024-09-26"));
 
-watch(serverOptions, () => { fetchData(); }, { deep: true });
+// watch(serverOptions, () => { fetchData(); }, { deep: true });
 
-watch(dateRange, async (newDate) => {
-  dashboardStore.dateRange = newDate;
-  // if (!newDate) return
-  start.value = newDate[0];
-  end.value = newDate[1];
-  getCount();
-  // console.log('selected date:', newDate)
-});
+// watch(dateRange, async (newDate) => {
+//   dashboardStore.dateRange = newDate;
+//   // if (!newDate) return
+//   start.value = newDate[0];
+//   end.value = newDate[1];
+//   getCount();
+//   // console.log('selected date:', newDate)
+// });
 
 const appendTableFooter = () => {
   // Add Last Reset Date div element inside datatable's footer
@@ -167,15 +173,14 @@ const updateResetDate = () => {
   container.innerHTML = convertDate(newResetDate.value);
 }
 
-onMounted(async () => {
-  await getConfigs();
+onMounted(() => {
+  getConfigs();
   fetchData();
-  appendTableFooter()
+  appendTableFooter();
 })
 </script>
 
 <template>
-  <Head title="Dashboard" />
 
   <AuthenticatedLayout>
     <div class="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5">
@@ -210,8 +215,6 @@ onMounted(async () => {
       </div>
 
       <EasyDataTable
-        v-model:server-options="serverOptions"
-        :server-items-length="serverItemsLength"
         :loading="loading"
         :headers="headers"
         :items="formattedItems"
@@ -229,18 +232,6 @@ onMounted(async () => {
             </div>
           </div>
         </template>
-        <template #footer>
-        <!-- Custom prepended content -->
-        <div class="custom-footer-content">
-          <!-- Your prepended content goes here -->
-          <p>Custom Data: </p>
-        </div>
-        <!-- Original footer content here (if needed) -->
-        <div class="original-footer-content">
-          <!-- Example: pagination or summary -->
-
-        </div>
-      </template>
       </EasyDataTable>
       <button
         @click="resetMonitoring"

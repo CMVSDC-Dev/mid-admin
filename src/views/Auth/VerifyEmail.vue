@@ -1,7 +1,6 @@
 <script setup>
 import PrimaryButton from '@/components/Buttons/PrimaryButton.vue';
 import GuestLayout from '@/layouts/GuestLayout.vue';
-import { Head, Link, useForm } from '@inertiajs/vue3';
 import { computed } from 'vue';
 
 const props = defineProps({
@@ -21,7 +20,6 @@ const verificationLinkSent = computed(() => props.status === 'verification-link-
 
 <template>
     <GuestLayout>
-        <Head title="Email Verification" />
 
         <div class="mb-4 text-sm text-gray-600">
             Thanks for signing up! Before getting started, could you verify your email address by clicking on the link

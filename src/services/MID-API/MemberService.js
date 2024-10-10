@@ -1,28 +1,27 @@
-import axios from "axios";
-const apiUrl = `/api/members`;
-const headers = {authorization: `Bearer ${localStorage.getItem("token")}`}
+// import axios from '@/plugins/axios';
+const apiUrl = `/members`;
 
 export default {
   /**Get Records */
   fetchRecords(request = {}) {
-    return axios.get(`${apiUrl}`, { params: request, headers: headers });
+    return axios.get(`${apiUrl}`, { params: request });
   },
 
   /**Get specific record via ID */
   fetchRecord(id) {
-    return axios.get(`${apiUrl}/${id}`, { headers: headers });
+    return axios.get(`${apiUrl}/${id}`);
   },
 
   /**Save record */
   async create(data) {
-    return axios.post(`${apiUrl}`, data, { headers: headers });
+    return axios.post(`${apiUrl}`, data);
   },
 
   async update(id, data) {
-    return axios.put(`${apiUrl}/${id}`, data, { headers: headers });
+    return axios.put(`${apiUrl}/${id}`, data);
   },
 
   async remove(id) {
-    return axios.delete(`${apiUrl}/${id}`, { headers: headers });
+    return axios.delete(`${apiUrl}/${id}`);
   },
 };

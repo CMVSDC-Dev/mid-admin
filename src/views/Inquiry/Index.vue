@@ -8,7 +8,8 @@ import InputGroup from '@/components/Forms/InputGroup';
 import SelectGroup from '@/components/Forms/SelectGroup';
 import AuthenticatedLayout from '@/layouts/AuthenticatedLayout';
 import { Inquiry } from '@/services/MID-API';
-import moment from 'moment';
+// import moment from 'moment';
+import moment from '@/plugins/moment';
 import { reactive, ref, watch } from 'vue';
 
 const pageTitle = ref('MID Inquiry')
@@ -153,7 +154,6 @@ watch(serverOptions, () => { submitForm(); }, { deep: true });
 </script>
 
 <template>
-  <Head :title="pageTitle" />
 
   <AuthenticatedLayout>
     <!-- Breadcrumb Start -->

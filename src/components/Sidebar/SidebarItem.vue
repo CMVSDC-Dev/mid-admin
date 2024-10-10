@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useSidebarStore } from '@/stores/sidebar';
-import SidebarDropdown from './SidebarDropdown.vue';
+import SidebarDropdown from './SidebarDropdown';
 
 const sidebarStore = useSidebarStore()
 

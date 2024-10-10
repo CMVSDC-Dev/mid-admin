@@ -1,27 +1,20 @@
-import axios from "axios";
-const apiUrl = `/api/inquiries`;
-const headers = {authorization: `Bearer ${localStorage.getItem("token")}`}
+// import axios from '@/plugins/axios';
+const apiUrl = `/inquiries`;
 
 export default {
   /** Search */
   search(data) {
-    return axios.post(`${apiUrl}/search`, data, { headers: headers });
+    return axios.post(`${apiUrl}/search`, data);
   },
 
   /**Get specific record via ID */
   fetchRecord(id) {
-    return axios.get(`${apiUrl}/${id}`, { headers: headers });
+    return axios.get(`${apiUrl}/${id}`);
   },
 
   /**Save record */
   async create(data) {
-    return axios.post(`${apiUrl}`, data, { headers: headers });
+    return axios.post(`${apiUrl}`, data);
   },
-
-  /**Count Entries */
-  async countEntries(data) {
-    return axios.post(`${apiUrl}/count-entries`, data, { headers: headers });
-  },
-
 
 };

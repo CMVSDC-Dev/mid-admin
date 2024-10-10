@@ -4,7 +4,6 @@ import InputError from '@/components/Forms/InputError.vue';
 import InputLabel from '@/components/Forms/InputLabel.vue';
 import TextInput from '@/components/Forms/TextInput.vue';
 import GuestLayout from '@/layouts/GuestLayout.vue';
-import { Head, useForm } from '@inertiajs/vue3';
 
 defineProps({
     status: {
@@ -23,7 +22,6 @@ const submit = () => {
 
 <template>
     <GuestLayout>
-        <Head title="Forgot Password" />
 
         <div class="mb-4 text-sm text-gray-600">
             Forgot your password? No problem. Just let us know your email address and we will email you a password reset

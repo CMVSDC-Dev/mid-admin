@@ -17,6 +17,7 @@ import "vue-toastification/dist/index.css"
 
 import App from './App.vue'
 import router from './router'
+// import axiosPlugin from './plugins/axios';  // Import your Axios plugin
 
 const pinia = createPinia()
 
@@ -46,5 +47,6 @@ app.use(pinia)
     position: "top-right",
     timeout: 5000
   })
+  // .use(axios)
   .component('EasyDataTable', Vue3EasyDataTable)
   .mount('#app')

@@ -31,7 +31,6 @@ const pageTitle = ref('User Edit')
 </script>
 
 <template>
-  <Head :title="pageTitle" />
 
   <AuthenticatedLayout>
     <!-- Breadcrumb Start -->

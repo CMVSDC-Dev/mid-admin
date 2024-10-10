@@ -4,7 +4,6 @@ import InputError from '@/components/Forms/InputError.vue';
 import InputLabel from '@/components/Forms/InputLabel.vue';
 import TextInput from '@/components/Forms/TextInput.vue';
 import GuestLayout from '@/layouts/GuestLayout.vue';
-import { Head, useForm } from '@inertiajs/vue3';
 
 const props = defineProps({
     email: {
@@ -33,7 +32,6 @@ const submit = () => {
 
 <template>
     <GuestLayout>
-        <Head title="Reset Password" />
 
         <form @submit.prevent="submit">
             <div>

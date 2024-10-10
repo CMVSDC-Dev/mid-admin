@@ -67,7 +67,6 @@ watch(searchValue, debounce(async () => { fetchData() }, 800), { deep: true });
 </script>
 
 <template>
-  <Head :title="pageTitle" />
 
   <AuthenticatedLayout>
     <!-- Breadcrumb Start -->

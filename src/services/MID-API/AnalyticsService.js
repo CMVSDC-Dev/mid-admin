@@ -1,27 +1,31 @@
-import axios from "axios";
-const apiUrl = `/api/analytics`;
-const headers = {authorization: `Bearer ${localStorage.getItem("token")}`}
+// import axios from '@/plugins/axios';
+
+const apiUrl = `/analytics`;
+// const headers = {authorization: `Bearer ${localStorage.getItem("token")}`}
 
 export default {
-  getCount(request = {}) {
-    return axios.get(`${apiUrl}/count`, { params: request, headers: headers });
+  fetchRecords(request = {}) {
+    return axios.get(`${apiUrl}`, { params: request });
   },
 
   getYears(request = {}) {
-    return axios.get(`${apiUrl}/years`, { params: request, headers: headers });
+    return axios.get(`${apiUrl}/years`, { params: request });
   },
 
   getMonths(request = {}) {
-    return axios.get(`${apiUrl}/months`, { params: request, headers: headers });
+    return axios.get(`${apiUrl}/months`, { params: request });
   },
 
   getYearlyData(request = {}) {
-    return axios.get(`${apiUrl}/yearly-data`, { params: request, headers: headers });
+    return axios.get(`${apiUrl}/yearly-data`, { params: request });
   },
 
   getMonthlyData(request = {}) {
-    return axios.get(`${apiUrl}/monthly-data`, { params: request, headers: headers });
+    return axios.get(`${apiUrl}/monthly-data`, { params: request });
   },
 
-  
+  /**Count Entries */
+  countEntries(request = {}) {
+    return axios.get(`${apiUrl}/count-entries`, { params: request });
+  },
 };
