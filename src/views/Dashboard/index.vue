@@ -1,26 +1,16 @@
 <script setup>
 import AuthenticatedLayout from '@/layouts/AuthenticatedLayout';
 import DataStatsOne from './Widgets/DataStats/DataStatsOne';
-import { Analytics, Inquiry, MonitoringConfig, Settings } from '@/services/MID-API';
-// import { useDashboardStore } from '@/stores/dashboard';
-// import moment from 'moment';
+import { Analytics, MonitoringConfig, Settings } from '@/services/MID-API';
 import moment from '@/plugins/moment';
 moment.tz.setDefault('Asia/Manila');
-import { computed, onMounted, ref, watch, nextTick } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { useToast } from "vue-toastification";
 const toast = useToast()
 
 const configs = ref([]);
-
 const lastResetDate = ref(moment());
-
-const newResetDate = ref(lastResetDate)
-
-// const dashboardStore = useDashboardStore()
-// const dateRange = ref([]);
-// const formatter = ref({ date: 'YYYY-MM-DD', month: 'MMMM' });
-// const start = ref(null);
-// const end = ref(null);
+const newResetDate = ref(lastResetDate);
 
 const convertDate = (newDate, pattern) => {
   let format = pattern ?? 'MMM D, YYYY hh:mma (ddd)';
