@@ -1,5 +1,4 @@
 // import axios from '@/plugins/axios';
-
 const apiUrl = `/analytics`;
 // const headers = {authorization: `Bearer ${localStorage.getItem("token")}`}
 
